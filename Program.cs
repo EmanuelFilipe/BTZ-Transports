@@ -1,4 +1,7 @@
+using AutoMapper;
+using BTZ_Transports.Config;
 using BTZ_Transports.Data;
+using BTZ_Transports.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +22,13 @@ namespace BTZ_Transports
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+            // IMapper
+            IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+            builder.Services.AddSingleton(mapper);
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            builder.Services.AddScoped<IMotoristaRepository, MotoristaRepository>();
 
             var app = builder.Build();
 
