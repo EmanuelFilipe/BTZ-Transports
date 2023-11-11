@@ -23,7 +23,8 @@ namespace BTZ_Transports.Controllers
             return View();
         }
 
-        [HttpPost]
+		[ValidateAntiForgeryToken]
+		[HttpPost]
         public IActionResult Create(MotoristaViewModel viewModel)
         {
             if(ModelState.IsValid)
@@ -49,6 +50,7 @@ namespace BTZ_Transports.Controllers
 			return View(motorista);
 		}
 
+		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public IActionResult Edit(MotoristaViewModel viewModel)
 		{

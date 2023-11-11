@@ -1,0 +1,60 @@
+﻿@model IEnumerable<VeiculoViewModel>
+@{
+	ViewData["Title"] = "Lista de Veículos";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p style="margin-bottom: 60px;">
+	<a class="fa-pull-right btn btn-outline-primary fa fa-plus" asp-action="Create"> Novo</a>
+</p>
+
+
+<table class="table table-hover table-striped">
+	<thead class="thead-dark">
+		<tr>
+			<th class="colRenavam">@Html.DisplayNameFor(model => model.Placa)</th>
+			<th class="colModelo">@Html.DisplayNameFor(model => model.NomeVeiculo)</th>
+			<th class="colQuilometragem">@Html.DisplayNameFor(model => model.Fabricante)</th>
+			<th class="colValor">@Html.DisplayNameFor(model => model.AnoFabricacao)</th>
+			<th class="colStatus">@Html.DisplayNameFor(model => model.CapacidadeMaximaTanque)</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model?.Count() > 0)
+		{
+			foreach (var item in Model)
+			{
+				<tr>
+					<td>@Html.DisplayTextFor(modelItem => item.Placa)</td>
+					<td>@Html.DisplayTextFor(modelItem => item.NomeVeiculo)</td>
+					<td>@Html.DisplayTextFor(modelItem => item.Fabricante)</td>
+					<td>@Html.DisplayTextFor(modelItem => item.AnoFabricacao)</td>
+					<td>@Html.DisplayTextFor(modelItem => item.CapacidadeMaximaTanque)</td>
+					<td class="text-right">
+						<a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id" title="Visualizar"><span class="fa fa-search"></span></a>
+						<a asp-action="Edit" class="btn btn-warning" asp-route-id="@item.Id" title="Editar"><span class="fa fa-pencil-alt"></span></a>
+						<a id="deleteItem" class="deleteItem btn btn-danger" data-bs-target="#basicModal" data-bs-toggle="modal" data-path="@Url.Action("Delete", "Veiculo", new { id = item.Id })" title="Deletar"><span class="fa fa-trash" /></a>
+					</td>
+				</tr>
+			}
+		}
+		else
+		{
+			<tr>
+				<td colspan="6" class="text-center">
+					<span><strong style="color: red">Sem dados</strong></span>
+				</td>
+
+			</tr>
+		}
+	</tbody>
+</table>
+
+<partial name="../Shared/_Delete" />
+
+@section Scripts {
+	<script src="~/lib/jquery/dist/jquery.js"></script>
+	<script src="~/js/local/deleteItemScript.js"></script>
+}

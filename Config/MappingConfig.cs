@@ -10,6 +10,7 @@ namespace BTZ_Transports.Config
         {
             var mappingConfig = new MapperConfiguration(config => {
                 config.CreateMap<MotoristaViewModel, Motorista>().ReverseMap();
+                config.CreateMap<VeiculoViewModel, Veiculo>().ReverseMap();
             });
             return mappingConfig;
         }

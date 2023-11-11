@@ -29,6 +29,8 @@ namespace BTZ_Transports
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             builder.Services.AddScoped<IMotoristaRepository, MotoristaRepository>();
+            builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
+            builder.Services.AddScoped<ICombustivelRepository, CombustivelRepository>();
 
             var app = builder.Build();
 

@@ -89,23 +89,4 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/jquery.mask/jquery.mask.js"></script>
 	<script src="~/js/local/Motorista.js"></script>
-
-	@* <script>
-		// Adiciona a máscara de CPF e impede que caracteres não numéricos sejam inseridos
-		document.getElementById('cpf').addEventListener('input', function (event) {
-			// Remove caracteres não numéricos
-			let cpf = event.target.value.replace(/\D/g, '');
-
-			// Adiciona a máscara de CPF
-			if (cpf.length <= 3) {
-				event.target.value = cpf;
-			} else if (cpf.length <= 6) {
-				event.target.value = cpf.slice(0, 3) + '.' + cpf.slice(3);
-			} else if (cpf.length <= 9) {
-				event.target.value = cpf.slice(0, 3) + '.' + cpf.slice(3, 6) + '.' + cpf.slice(6);
-			} else {
-				event.target.value = cpf.slice(0, 3) + '.' + cpf.slice(3, 6) + '.' + cpf.slice(6, 9) + '-' + cpf.slice(9, 11);
-			}
-		});
-	</script> *@
 }

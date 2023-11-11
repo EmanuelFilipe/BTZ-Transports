@@ -12,6 +12,7 @@ namespace BTZ_Transports.Data
 
         public DbSet<Motorista> Motoristas { get; set; }
         public DbSet<Combustivel> Combustiveis { get; set; }
+        public DbSet<Veiculo> Veiculos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
