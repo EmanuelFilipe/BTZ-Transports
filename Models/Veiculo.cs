@@ -35,8 +35,13 @@ namespace BTZ_Transports.Models
         [StringLength(2000)]
         public string Observacoes { get; set; }
 
-        [ForeignKey("CombustivelId")]
-        public int combustivelId { get; set; }
-        public virtual Combustivel Combustivel { get; set; }
+		// Relacionamento com Combustivel
+		[ForeignKey("Combustivel")]
+		public int CombustivelId { get; set; }
+		public virtual Combustivel Combustivel { get; set; }
+
+
+		// Relacionamento com Abastecimento
+		public virtual ICollection<Abastecimento> Abastecimentos { get; set; }
     }
 }

@@ -4,16 +4,18 @@ using BTZ_Transports.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace BTZ_Transports.Data.Migrations
+namespace BTZ_Transports.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231111222254_AddTablesOnDB")]
+    partial class AddTablesOnDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +23,47 @@ namespace BTZ_Transports.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("BTZ_Transports.Models.Abastecimento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CombustivelId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("data");
+
+                    b.Property<int>("MotoristaId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuantidadeAbastecida")
+                        .HasColumnType("int")
+                        .HasColumnName("qtd_abastecida");
+
+                    b.Property<decimal>("ValorTotal")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("valor_total");
+
+                    b.Property<int>("VeiculoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CombustivelId");
+
+                    b.HasIndex("MotoristaId");
+
+                    b.HasIndex("VeiculoId");
+
+                    b.ToTable("abastecimento");
+                });
 
             modelBuilder.Entity("BTZ_Transports.Models.Combustivel", b =>
                 {
@@ -76,17 +119,19 @@ namespace BTZ_Transports.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CPF")
+                        .IsRequired()
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)")
                         .HasColumnName("cpf");
 
                     b.Property<string>("CategoriaCNH")
+                        .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("nvarchar(1)")
                         .HasColumnName("categoria_cnh");
 
-                    b.Property<int>("CodStatus")
-                        .HasColumnType("int")
+                    b.Property<bool>("CodStatus")
+                        .HasColumnType("bit")
                         .HasColumnName("status");
 
                     b.Property<DateTime>("DataNascimento")
@@ -94,11 +139,13 @@ namespace BTZ_Transports.Data.Migrations
                         .HasColumnName("data_nascimento");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("nome");
 
                     b.Property<string>("NumeroCNH")
+                        .IsRequired()
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)")
                         .HasColumnName("numero_cnh");
@@ -125,6 +172,9 @@ namespace BTZ_Transports.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("capacidade_max_tanque");
 
+                    b.Property<int>("CombustivelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Fabricante")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -148,12 +198,9 @@ namespace BTZ_Transports.Data.Migrations
                         .HasColumnType("nvarchar(7)")
                         .HasColumnName("placa");
 
-                    b.Property<int>("combustivelId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("combustivelId");
+                    b.HasIndex("CombustivelId");
 
                     b.ToTable("veiculo");
                 });
@@ -360,12 +407,39 @@ namespace BTZ_Transports.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("BTZ_Transports.Models.Abastecimento", b =>
+                {
+                    b.HasOne("BTZ_Transports.Models.Combustivel", "Combustivel")
+                        .WithMany()
+                        .HasForeignKey("CombustivelId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("BTZ_Transports.Models.Motorista", "Motorista")
+                        .WithMany("Abastecimentos")
+                        .HasForeignKey("MotoristaId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("BTZ_Transports.Models.Veiculo", "Veiculo")
+                        .WithMany("Abastecimentos")
+                        .HasForeignKey("VeiculoId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Combustivel");
+
+                    b.Navigation("Motorista");
+
+                    b.Navigation("Veiculo");
+                });
+
             modelBuilder.Entity("BTZ_Transports.Models.Veiculo", b =>
                 {
                     b.HasOne("BTZ_Transports.Models.Combustivel", "Combustivel")
                         .WithMany()
-                        .HasForeignKey("combustivelId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CombustivelId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Combustivel");
@@ -420,6 +494,16 @@ namespace BTZ_Transports.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("BTZ_Transports.Models.Motorista", b =>
+                {
+                    b.Navigation("Abastecimentos");
+                });
+
+            modelBuilder.Entity("BTZ_Transports.Models.Veiculo", b =>
+                {
+                    b.Navigation("Abastecimentos");
                 });
 #pragma warning restore 612, 618
         }

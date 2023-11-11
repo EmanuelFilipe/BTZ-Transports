@@ -10,26 +10,34 @@ namespace BTZ_Transports.Models
     {
         [Column("nome")]
         [StringLength(100)]
+        [Required]
         public string Nome { get; set; }
 
         [Column("cpf")]
         [StringLength(14)]
+        [Required]
         public string CPF { get; set; }
 
         [Column("numero_cnh")]
         [StringLength(12)]
-        
+        [Required]
         public string NumeroCNH { get; set; }
 
         [Column("categoria_cnh")]
         [StringLength(1)]
-		public string CategoriaCNH { get; set; }
+        [Required]
+        public string CategoriaCNH { get; set; }
 
 
         [Column("data_nascimento")]
-		public DateTime DataNascimento { get; set; }
+        [Required]
+        public DateTime DataNascimento { get; set; }
 
         [Column("status")]
-        public int CodStatus { get; set; }
+        [Required]
+        public bool CodStatus { get; set; }
+
+        // Relacionamento com Abastecimento
+        public virtual ICollection<Abastecimento> Abastecimentos { get; set; }
     }
 }
