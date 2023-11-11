@@ -41,13 +41,19 @@ namespace BTZ_Transports.Repository
 			_context.SaveChanges();
 		}
 
-        public void Delete(int id)
+        public bool Delete(int id)
         {
-			var motorista = _context.Motoristas.Find(id);
-			motorista.CodStatus = 0;
+            if (id <= 0)
+                return false;
+            else
+            {
+			    var motorista = _context.Motoristas.Find(id);
 
-			_context.Motoristas.Update(motorista);
-			_context.SaveChanges();
+			    _context.Motoristas.Remove(motorista);
+			    _context.SaveChanges();
+
+                return true;
+            }
 		}
     }
 }

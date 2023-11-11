@@ -30,6 +30,7 @@ namespace BTZ_Transports.Controllers
             {
                 _motoristaRepository.Add(viewModel);
 
+                TempData["MSG_SUCCESS"] = "Motorista criado com sucesso!";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -63,16 +64,19 @@ namespace BTZ_Transports.Controllers
 
 		public IActionResult Delete(int? id)
 		{
-			if (id == null) return NotFound();
+			if (id == null)
+                TempData["MSG_ERRO"] = "Ocorreu um erro ao realizar a exclusão!";
+            else
+            {
+                var status = _motoristaRepository.Delete(id.Value);
 
-			//if (CustomValidationBeforeDelete((int)id))
-			//{
-			//	TempData["MSG_ERRO"] = "Esta Marca esta sendo utilizada na tabela de Veículos!";
-			//	return RedirectToAction(nameof(Index));
-			//}
-
-			_motoristaRepository.Delete(id.Value);
-			return RedirectToAction(nameof(Index));
-		}
+                if (!status)
+                    TempData["MSG_ERRO"] = "Ocorreu um erro ao realizar a exclusão!";
+                else
+                    TempData["MSG_SUCCESS"] = "Motorista excluído com sucesso!";
+            }
+            
+            return RedirectToAction(nameof(Index));
+        }
 	}
 }

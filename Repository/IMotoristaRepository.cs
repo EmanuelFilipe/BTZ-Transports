@@ -8,6 +8,6 @@ namespace BTZ_Transports.Repository
         MotoristaViewModel GetById(int id);
         void Add(MotoristaViewModel model);
         void Update(MotoristaViewModel model);
-        void Delete(int id);
+        bool Delete(int id);
     }
 }
