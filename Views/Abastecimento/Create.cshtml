@@ -1,0 +1,88 @@
+﻿@model AbastecimentoViewModel
+
+@{
+	ViewData["Title"] = "Novo Abastecimento";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+	<div class="col-md-12">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danter"></div>
+			<div class="row mb-3">
+				@if (ViewBag.ListaVeiculosSelectList != null)
+				{
+					<div class="col-md-4">
+						<div class="form-group" style="width: 370px; ">
+							<span class="colorRed">* </span><label asp-for="veiculoId" class="control-label"></label>
+							@Html.DropDownList("veiculoId", ViewBag.ListaVeiculosSelectList as SelectList, "Selecione", new { @class = "form-control" })
+							<span asp-validation-for="veiculoId" class="text-danger"></span>
+						</div>
+					</div>
+				}
+
+
+				@if (ViewBag.ListaMotoristasSelectList != null)
+				{
+					<div class="col-md-3">
+						<div class="form-group" style="margin-left: 15px">
+							<span class="colorRed">* </span><label asp-for="motoristaId" class="control-label"></label>
+							@Html.DropDownList("motoristaId", ViewBag.ListaMotoristasSelectList as SelectList, "Selecione", new { @class = "form-control" })
+							<span asp-validation-for="motoristaId" class="text-danger"></span>
+						</div>
+					</div>
+				}
+
+				@if (ViewBag.ListaCombustiveisSelectList != null)
+				{
+					<div class="col-md-2">
+						<div class="form-group">
+							<span class="colorRed">* </span><label asp-for="combustivelId" class="control-label"></label>
+							@Html.DropDownList("combustivelId", ViewBag.ListaCombustiveisSelectList as SelectList, "Selecione", new { @class = "form-control" })
+							<span asp-validation-for="combustivelId" class="text-danger"></span>
+						</div>
+					</div>
+				}
+			</div>
+
+			<div class="row mb-3">
+				<div class="col-md-2">
+					<div class="form-group">
+						<span class="colorRed">* </span><label asp-for="Data" class="control-label"></label>
+						<input id="cep" asp-for="Data" class="form-control" type="date" />
+						<span asp-validation-for="Data" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="col-md-2" style="width: 205px">
+					<div class="form-group">
+						<span class="colorRed">* </span><label asp-for="QuantidadeAbastecida" class="control-label"></label>
+						<input asp-for="QuantidadeAbastecida" class="form-control" type="number"  />
+						<span asp-validation-for="QuantidadeAbastecida" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="form-group" style="width: 245px">
+						<label asp-for="ValorTotal" class="control-label"></label>
+						<input asp-for="ValorTotal" class="form-control" maxlength="50" disabled />
+						<span asp-validation-for="ValorTotal" class="text-danger"></span>
+					</div>
+				</div>
+
+			</div>
+
+			<hr />
+			<div class="form-group">
+				<a class="btn btn-secondary" asp-action="Index">Voltar</a>
+				<input type="submit" value="Salvar" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

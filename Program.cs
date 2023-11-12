@@ -31,6 +31,7 @@ namespace BTZ_Transports
             builder.Services.AddScoped<IMotoristaRepository, MotoristaRepository>();
             builder.Services.AddScoped<IVeiculoRepository, VeiculoRepository>();
             builder.Services.AddScoped<ICombustivelRepository, CombustivelRepository>();
+            builder.Services.AddScoped<IAbastecimentoRepository, AbastecimentoRepository>();
             builder.Services.AddScoped<IDataService, DataService>();
 
             var app = builder.Build();
