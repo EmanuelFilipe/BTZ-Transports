@@ -5,19 +5,21 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<p style="margin-bottom: 60px;">
+<link href="~/css/local/Motorista.css" rel="stylesheet" />
+
+<p class="ajusteDivCreate">
 	<a class="fa-pull-right btn btn-outline-primary fa fa-plus" asp-action="Create"> Novo</a>
 </p>
 
 
 <table class="table table-hover table-striped">
-	<thead class="thead-dark">
+	<thead class="table-dark">
 		<tr>
-			<th class="colRenavam">@Html.DisplayNameFor(model => model.Nome)</th>
-			<th class="colModelo">@Html.DisplayNameFor(model => model.CPF)</th>
-			<th class="colQuilometragem">@Html.DisplayNameFor(model => model.NumeroCNH)</th>
-			<th class="colValor">@Html.DisplayNameFor(model => model.CategoriaCNH)</th>
-			<th class="colStatus">@Html.DisplayNameFor(model => model.DataNascimento)</th>
+			<th class="colNome">@Html.DisplayNameFor(model => model.Nome)</th>
+			<th class="colCPF">@Html.DisplayNameFor(model => model.CPF)</th>
+			<th class="colNumeroCNH">@Html.DisplayNameFor(model => model.NumeroCNH)</th>
+			<th class="colCategoriaCNH">@Html.DisplayNameFor(model => model.CategoriaCNH)</th>
+			<th class="colDataNascimento">@Html.DisplayNameFor(model => model.DataNascimento)</th>
 			<th class="colStatus">@Html.DisplayNameFor(model => model.CodStatus)</th>
 			<th></th>
 		</tr>
@@ -30,12 +32,13 @@
 				<tr>
 					@{
 						var status = (item.CodStatus == 1 ? "Ativo" : "Inativo");
+						var date = string.Format("{0:dd/MM/yyyy}", item.DataNascimento);
 					}
 					<td>@Html.DisplayTextFor(modelItem => item.Nome)</td>
 					<td>@Html.DisplayTextFor(modelItem => item.CPF)</td>
 					<td>@Html.DisplayTextFor(modelItem => item.NumeroCNH)</td>
 					<td>@Html.DisplayTextFor(modelItem => item.CategoriaCNH)</td>
-					<td>@Html.DisplayTextFor(modelItem => item.DataNascimento)</td>
+					<td>@Html.DisplayTextFor(modelItem => date)</td>
 					<td>@Html.DisplayTextFor(modelItem => status)</td>
 					<td class="text-right">
 						<a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id" title="Visualizar"><span class="fa fa-search"></span></a>

@@ -5,18 +5,21 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<p style="margin-bottom: 60px;">
+<link href="~/css/local/Abastecimento.css" rel="stylesheet" />
+
+<p class="ajusteDivCreate">
 	<a class="fa-pull-right btn btn-outline-primary fa fa-plus" asp-action="Create"> Novo</a>
 </p>
 
 <table class="table table-hover table-striped">
-	<thead class="thead-dark">
+	<thead class="table-dark">
 		<tr>
-			<th class="colRenavam">@Html.DisplayNameFor(model => model.Veiculo.NomeVeiculo)</th>
-			<th class="colModelo">@Html.DisplayNameFor(model => model.Motorista.Nome)</th>
-			<th class="colQuilometragem">@Html.DisplayNameFor(model => model.Data)</th>
-			<th class="colValor">@Html.DisplayNameFor(model => model.Combustivel.Nome)</th>
-			<th class="colStatus">@Html.DisplayNameFor(model => model.QuantidadeAbastecida)</th>
+			<th class="colNomeVeiculo">@Html.DisplayNameFor(model => model.Veiculo.NomeVeiculo)</th>
+			<th class="colNomeMotorista">@Html.DisplayNameFor(model => model.Motorista.Nome)</th>
+			<th class="colData">@Html.DisplayNameFor(model => model.Data)</th>
+			<th class="colTipoCombustivel">@Html.DisplayNameFor(model => model.Combustivel.Nome)</th>
+			<th class="colQuantidadeAbastecida">@Html.DisplayNameFor(model => model.QuantidadeAbastecida)</th>
+			<th class="colValorTotal">@Html.DisplayNameFor(model => model.ValorTotal)</th>
 			<th></th>
 		</tr>
 	</thead>
@@ -26,11 +29,16 @@
 			foreach (var item in Model)
 			{
 				<tr>
+					
 					<td>@Html.DisplayTextFor(modelItem => item.Veiculo.NomeVeiculo)</td>
 					<td>@Html.DisplayTextFor(modelItem => item.Motorista.Nome)</td>
-					<td>@Html.DisplayTextFor(modelItem => item.Data)</td>
+					<td>
+						@{ var date = String.Format("{0:dd/MM/yyyy}", item.Data); }
+						@Html.DisplayTextFor(modelItem => date)
+					</td>
 					<td>@Html.DisplayTextFor(modelItem => item.Combustivel.Nome)</td>
 					<td>@Html.DisplayTextFor(modelItem => item.QuantidadeAbastecida)</td>
+					<td>@Html.DisplayTextFor(modelItem => item.ValorTotal)</td>
 					<td class="text-right">
 						<a asp-action="Details" class="btn btn-info" asp-route-id="@item.Id" title="Visualizar"><span class="fa fa-search"></span></a>
 					</td>

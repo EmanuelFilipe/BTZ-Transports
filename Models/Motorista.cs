@@ -11,6 +11,7 @@ namespace BTZ_Transports.Models
         [Column("nome")]
         [StringLength(100)]
         [Required]
+        [DisplayName("Nome Motorista")]
         public string Nome { get; set; }
 
         [Column("cpf")]

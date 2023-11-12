@@ -1,4 +1,5 @@
-﻿using BTZ_Transports.Repository;
+﻿using BTZ_Transports.Models;
+using BTZ_Transports.Repository;
 using BTZ_Transports.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -39,8 +40,10 @@ namespace BTZ_Transports.Controllers
 		[HttpPost]
 		public IActionResult Create(AbastecimentoViewModel viewModel)
 		{
-			if (ModelState.IsValid)
+			if (ModelState.IsValid && CustomValidationIsValid(viewModel))
 			{
+				CalculaValorTotalCombustivel(viewModel);
+
 				_abastecimentoRepository.Add(viewModel);
 				TempData["MSG_SUCCESS"] = "Abastecimento registrado com sucesso!";
 
@@ -49,6 +52,13 @@ namespace BTZ_Transports.Controllers
 
 			GetListas(viewModel);
 			return View(viewModel);
+		}
+
+		private void CalculaValorTotalCombustivel(AbastecimentoViewModel viewModel)
+		{
+			var combustivel = _combustivelRepository.GetById(viewModel.combustivelId);
+
+			viewModel.ValorTotal = viewModel.QuantidadeAbastecida * combustivel.Preco;
 		}
 
 		public IActionResult Details(int id)
@@ -124,5 +134,26 @@ namespace BTZ_Transports.Controllers
 
             ViewBag.ListaCombustiveisSelectList = lista;
         }
-    }
+
+		private bool CustomValidationIsValid(AbastecimentoViewModel viewModel)
+		{
+			bool ret = true;
+
+			var veiculoDB = _veiculoRepository.GetById(viewModel.veiculoId);
+
+			if (viewModel.QuantidadeAbastecida > veiculoDB.CapacidadeMaximaTanque)
+				ModelState.AddModelError("QuantidadeAbastecida", "A quantidade abastecida informada é maior que a capacidade máxima do veiculo selecionado.");
+
+			if (viewModel.combustivelId > veiculoDB.combustivelId)
+				ModelState.AddModelError("combustivelId", "O tipo do combustível selecionado é diferente do cadastrado para este veículo.");
+
+
+			int countErros = ModelState.Values.Count(x => x.Errors.Count > 0);
+
+			if (countErros > 0)
+				ret = false;
+
+			return ret;
+		}
+	}
 }

@@ -1,4 +1,5 @@
 ﻿using BTZ_Transports.Models.Base;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +16,7 @@ namespace BTZ_Transports.Models
         [Column("nome_veiculo")]
         [StringLength(20)]
         [Required]
+        [DisplayName("Nome Veículo")]
         public string NomeVeiculo { get; set; }
 
         [Column("fabricante")]

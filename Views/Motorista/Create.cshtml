@@ -23,7 +23,7 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<span class="colorRed">* </span><label asp-for="CPF" class="control-label"></label>
-						<input id="cpf" asp-for="CPF" class="form-control" maxlength="14" placeholder="999.999.999-99" />
+						<input id="cpf" asp-for="CPF" class="form-control" maxlength="11" placeholder="999.999.999-99" />
 						<span asp-validation-for="CPF" class="text-danger"></span>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 				<div class="col-md-3">
 					<div class="form-group">
 						<span class="colorRed">* </span><label asp-for="NumeroCNH" class="control-label"></label>
-						<input asp-for="NumeroCNH" class="form-control" maxlength="40" />
+						<input asp-for="NumeroCNH" class="form-control" maxlength="12" />
 						<span asp-validation-for="NumeroCNH" class="text-danger"></span>
 					</div>
 				</div>

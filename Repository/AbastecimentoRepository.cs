@@ -38,7 +38,7 @@ namespace BTZ_Transports.Repository
 
 			var aux = _mapper.Map<List<AbastecimentoViewModel>>(abastecimentos);
 
-			return aux.FirstOrDefault();
+			return aux.FirstOrDefault(c => c.Id == id);
 		}
 
 		public void Add(AbastecimentoViewModel viewModel)

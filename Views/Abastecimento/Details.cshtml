@@ -15,7 +15,7 @@
 				{
 					<div class="col-md-4">
 						<div class="form-group" style="width: 370px; ">
-							<span class="colorRed">* </span><label asp-for="veiculoId" class="control-label"></label>
+							<label asp-for="veiculoId" class="control-label"></label>
 							@Html.DropDownList("veiculoId", ViewBag.ListaVeiculosSelectList as SelectList, "Selecione", new { @class = "form-control", disabled = "disabled" })
 							<span asp-validation-for="veiculoId" class="text-danger"></span>
 						</div>
@@ -27,7 +27,7 @@
 				{
 					<div class="col-md-3">
 						<div class="form-group" style="margin-left: 15px">
-							<span class="colorRed">* </span><label asp-for="motoristaId" class="control-label"></label>
+							<label asp-for="motoristaId" class="control-label"></label>
 							@Html.DropDownList("motoristaId", ViewBag.ListaMotoristasSelectList as SelectList, "Selecione", new { @class = "form-control", disabled = "disabled" })
 							<span asp-validation-for="motoristaId" class="text-danger"></span>
 						</div>
@@ -38,7 +38,7 @@
 				{
 					<div class="col-md-2">
 						<div class="form-group">
-							<span class="colorRed">* </span><label asp-for="combustivelId" class="control-label"></label>
+							<label asp-for="combustivelId" class="control-label"></label>
 							@Html.DropDownList("combustivelId", ViewBag.ListaCombustiveisSelectList as SelectList, "Selecione", new { @class = "form-control", disabled = "disabled" })
 							<span asp-validation-for="combustivelId" class="text-danger"></span>
 						</div>
@@ -49,7 +49,7 @@
 			<div class="row mb-3">
 				<div class="col-md-2">
 					<div class="form-group">
-						<span class="colorRed">* </span><label asp-for="Data" class="control-label"></label>
+						<label asp-for="Data" class="control-label"></label>
 						<input id="cep" asp-for="Data" class="form-control" type="date" disabled />
 						<span asp-validation-for="Data" class="text-danger"></span>
 					</div>
@@ -57,7 +57,7 @@
 
 				<div class="col-md-2" style="width: 205px">
 					<div class="form-group">
-						<span class="colorRed">* </span><label asp-for="QuantidadeAbastecida" class="control-label"></label>
+						<label asp-for="QuantidadeAbastecida" class="control-label"></label>
 						<input asp-for="QuantidadeAbastecida" class="form-control" type="number" disabled />
 						<span asp-validation-for="QuantidadeAbastecida" class="text-danger"></span>
 					</div>
@@ -66,7 +66,7 @@
 				<div class="col-md-3">
 					<div class="form-group" style="width: 245px">
 						<label asp-for="ValorTotal" class="control-label"></label>
-						<input asp-for="ValorTotal" class="form-control" maxlength="50" disabled />
+						<input asp-for="ValorTotal" class="form-control"  disabled />
 						<span asp-validation-for="ValorTotal" class="text-danger"></span>
 					</div>
 				</div>

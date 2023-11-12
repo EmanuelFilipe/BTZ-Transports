@@ -11,6 +11,8 @@
 	<div class="col-md-12">
 		<form asp-action="Create">
 			<div asp-validation-summary="ModelOnly" class="text-danter"></div>
+			<input type="hidden" id="seuValorHidden" value="@ViewBag.ListaCombustiveisSelectList" />
+
 			<div class="row mb-3">
 				@if (ViewBag.ListaVeiculosSelectList != null)
 				{
@@ -59,18 +61,18 @@
 				<div class="col-md-2" style="width: 205px">
 					<div class="form-group">
 						<span class="colorRed">* </span><label asp-for="QuantidadeAbastecida" class="control-label"></label>
-						<input asp-for="QuantidadeAbastecida" class="form-control" type="number"  />
+						<input id="qtdAbastecida" asp-for="QuantidadeAbastecida" class="form-control" type="number"  />
 						<span asp-validation-for="QuantidadeAbastecida" class="text-danger"></span>
 					</div>
 				</div>
 
-				<div class="col-md-3">
+				@* <div class="col-md-3">
 					<div class="form-group" style="width: 245px">
 						<label asp-for="ValorTotal" class="control-label"></label>
 						<input asp-for="ValorTotal" class="form-control" maxlength="50" disabled />
 						<span asp-validation-for="ValorTotal" class="text-danger"></span>
 					</div>
-				</div>
+				</div> *@
 
 			</div>
 
@@ -85,4 +87,13 @@
 
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />
+
+	@* <script>
+		$(document).ready(function () {
+			$("#qtdAbastecida").on("blur", function () {
+				var seuValor = document.getElementById('seuValorHidden').value;
+				alert(seuValor);
+			})
+		});
+	</script> *@
 }

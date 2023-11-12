@@ -1,0 +1,23 @@
+﻿.colNome {
+	width: 20%;
+}
+
+.colCPF {
+	width: 12%;
+}
+
+.colNumeroCNH {
+	width: 15%;
+}
+
+.colCategoriaCNH {
+	width: 12%;
+}
+
+.colDataNascimento {
+	width: 14%;
+}
+
+.colStatus {
+	width: 10%;
+}

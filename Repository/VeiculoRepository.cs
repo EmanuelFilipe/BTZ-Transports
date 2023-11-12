@@ -31,6 +31,7 @@ namespace BTZ_Transports.Repository
         public void Add(VeiculoViewModel model)
         {
             Veiculo veiculo = _mapper.Map<Veiculo>(model);
+            veiculo.Placa = veiculo.Placa.ToUpper();
             _context.Veiculos.Add(veiculo);
             _context.SaveChanges();
         }
@@ -38,6 +39,7 @@ namespace BTZ_Transports.Repository
         public void Update(VeiculoViewModel model)
         {
             Veiculo veiculo = _mapper.Map<Veiculo>(model);
+            veiculo.Placa = veiculo.Placa.ToUpper();
             _context.Veiculos.Update(veiculo);
             _context.SaveChanges();
         }

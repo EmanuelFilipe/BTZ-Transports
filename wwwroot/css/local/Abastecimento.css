@@ -1,0 +1,23 @@
+﻿.colNomeVeiculo {
+	width: 23%;
+}
+
+.colNomeMotorista {
+	width: 23%;
+}
+
+.colData {
+	width: 8%;
+}
+
+.colTipoCombustivel {
+	width: 8%;
+}
+
+.colQuantidadeAbastecida {
+	width: 18%;
+}
+
+.colValorTotal {
+	width: 13%;
+}

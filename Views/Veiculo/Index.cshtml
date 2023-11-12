@@ -5,19 +5,21 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<p style="margin-bottom: 60px;">
+<link href="~/css/local/Veiculo.css" rel="stylesheet" />
+
+<p class="ajusteDivCreate">
 	<a class="fa-pull-right btn btn-outline-primary fa fa-plus" asp-action="Create"> Novo</a>
 </p>
 
 
 <table class="table table-hover table-striped">
-	<thead class="thead-dark">
+	<thead class="table-dark">
 		<tr>
-			<th class="colRenavam">@Html.DisplayNameFor(model => model.Placa)</th>
-			<th class="colModelo">@Html.DisplayNameFor(model => model.NomeVeiculo)</th>
-			<th class="colQuilometragem">@Html.DisplayNameFor(model => model.Fabricante)</th>
-			<th class="colValor">@Html.DisplayNameFor(model => model.AnoFabricacao)</th>
-			<th class="colStatus">@Html.DisplayNameFor(model => model.CapacidadeMaximaTanque)</th>
+			<th class="colNome">@Html.DisplayNameFor(model => model.Placa)</th>
+			<th class="colNomVeiculo">@Html.DisplayNameFor(model => model.NomeVeiculo)</th>
+			<th class="colFabricante">@Html.DisplayNameFor(model => model.Fabricante)</th>
+			<th class="colAnoFabricacao">@Html.DisplayNameFor(model => model.AnoFabricacao)</th>
+			<th class="colCapacidadeTanque">@Html.DisplayNameFor(model => model.CapacidadeMaximaTanque)</th>
 			<th></th>
 		</tr>
 	</thead>
