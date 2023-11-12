@@ -1,11 +1,13 @@
 ﻿using BTZ_Transports.Models;
 using BTZ_Transports.Repository;
 using BTZ_Transports.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BTZ_Transports.Controllers
 {
+	[Authorize]
 	public class AbastecimentoController : Controller
 	{
 		private readonly IAbastecimentoRepository _abastecimentoRepository;

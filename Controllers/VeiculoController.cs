@@ -1,11 +1,13 @@
 ﻿using BTZ_Transports.Repository;
 using BTZ_Transports.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BTZ_Transports.Controllers
 {
-    public class VeiculoController : Controller
+	[Authorize]
+	public class VeiculoController : Controller
     {
         private readonly IVeiculoRepository _veiculoRepository;
         private readonly ICombustivelRepository _combustivelRepository;

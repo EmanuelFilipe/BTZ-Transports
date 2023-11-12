@@ -1,10 +1,12 @@
 ﻿using BTZ_Transports.Repository;
 using BTZ_Transports.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BTZ_Transports.Controllers
 {
-    public class MotoristaController : Controller
+	[Authorize]
+	public class MotoristaController : Controller
     {
         private readonly IMotoristaRepository _motoristaRepository;
 
